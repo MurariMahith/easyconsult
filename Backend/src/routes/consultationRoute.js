@@ -1,0 +1,116 @@
+const { Router } = require('express');
+const Consultation = require('../db/schemas/Consultation');
+const Patient = require('../db/schemas/Patient');
+const Doctor = require('../db/schemas/Doctor');
+
+const consultationRouter = Router();
+
+// Get all consultations
+consultationRouter.get('/', async (req, res) => {
+  try {
+    const consultations = await Consultation.find();
+    res.status(200).json(consultations);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+consultationRouter.get('/all', async (req, res) => {
+  try {
+    const consultations = await Consultation.find()
+      .populate('patientId') // Populate the 'patient' property with the patient object
+      .populate('doctorId'); // Populate the 'doctor' property with the doctor object
+
+    res.status(200).json(consultations);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Get all consultations with a specific patient ID
+consultationRouter.get('/patient/:patientId', async (req, res) => {
+  try {
+    const consultations = await Consultation.find({ patientId: req.params.patientId });
+    res.status(200).json(consultations);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Get all consultations with a specific doctor ID
+consultationRouter.get('/doctor/:doctorId', async (req, res) => {
+  try {
+    const consultations = await Consultation.find({ doctorId: req.params.doctorId });
+    res.status(200).json(consultations);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Get all consultations with a specific patient and doctor ID
+consultationRouter.get('/patient/:patientId/doctor/:doctorId', async (req, res) => {
+  try {
+    const consultations = await Consultation.find({
+      patientId: req.params.patientId,
+      doctorId: req.params.doctorId,
+    });
+    res.status(200).json(consultations);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Get a consultation by ID
+consultationRouter.get('/:id', async (req, res) => {
+  try {
+    const consultation = await Consultation.findById(req.params.id);
+    if (!consultation) {
+      return res.status(404).json({ error: 'Consultation not found' });
+    }
+    res.status(200).json(consultation);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Create a new consultation
+consultationRouter.post('/create', async (req, res) => {
+  try {
+    const { patientId, doctorId, time, diagnosis } = req.body;
+
+    const newConsultation = new Consultation({
+      patientId,
+      doctorId,
+      time,
+      diagnosis,
+    });
+
+    const savedConsultation = await newConsultation.save();
+    res.status(201).json(savedConsultation);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Delete a consultation by ID
+consultationRouter.delete('/:id', async (req, res) => {
+  try {
+    const consultation = await Consultation.findByIdAndRemove(req.params.id);
+    if (!consultation) {
+      return res.status(404).json({ error: 'Consultation not found' });
+    }
+    res.status(204).send();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+module.exports = consultationRouter;
