@@ -173,3 +173,4 @@
 [10/29/2023, 10:13:53 PM] Running express server on port 3000
 [10/29/2023, 10:14:57 PM] Running express server on port 3000
 [10/29/2023, 10:15:05 PM] /diagnosis Request Method: GET
+[10/29/2023, 11:07:16 PM] Running express server on port 3000
