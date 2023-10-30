@@ -1,4 +1,5 @@
 const express = require('express');
+var cors = require('cors')
 // logger
 const log = require('./logs/logger');
 // routes
@@ -15,6 +16,7 @@ const app = express();
 // Middle ware
 //json
 app.use(express.json());
+app.use(cors())
 
 //log requests coming to server
 app.use((req, res, next) => {
@@ -23,7 +25,7 @@ app.use((req, res, next) => {
 })
 
 
-app.listen(3000, () => {
+app.listen(3030, () => {
     console.log("Running express server on port 3000");
     log("Running express server on port 3000");
 })

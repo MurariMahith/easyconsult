@@ -27,7 +27,7 @@ patientRouter.get("/doctor/:doctorId", (req, res) => {
 patientRouter.get("/:id", async (req, res) => {
     try 
     {
-        const patientId = parseInt(req.params.id); 
+        const patientId = req.params.id; 
         if (!mongoose.Types.ObjectId.isValid(patientId)) {
             return res.status(400).json({ error: 'Invalid patient ID' });
           }
@@ -38,6 +38,7 @@ patientRouter.get("/:id", async (req, res) => {
           res.status(404).json({ error: 'Patient not found' });
         }
       } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Error fetching patient' });
       }
 })

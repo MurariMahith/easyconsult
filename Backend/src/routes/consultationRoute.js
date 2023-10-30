@@ -113,4 +113,41 @@ consultationRouter.delete('/:id', async (req, res) => {
   }
 });
 
+// Update a consultation by ID
+consultationRouter.put('/:id', async (req, res) => {
+  try {
+    const consultationId = req.params.id;
+
+    const updatedFields = {};
+    if (req.body.patientId) {
+      updatedFields.patientId = req.body.patientId;
+    }
+    if (req.body.doctorId) {
+      updatedFields.doctorId = req.body.doctorId;
+    }
+    if (req.body.time) {
+      updatedFields.time = req.body.time;
+    }
+    if (req.body.diagnosis) {
+      updatedFields.diagnosis = req.body.diagnosis;
+    }
+
+    const updatedConsultation = await Consultation.findByIdAndUpdate(
+      consultationId,
+      { $set: updatedFields },
+      { new: true }
+    );
+
+    if (!updatedConsultation) {
+      return res.status(404).json({ error: 'Consultation not found' });
+    }
+
+    res.status(200).json(updatedConsultation);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 module.exports = consultationRouter;
