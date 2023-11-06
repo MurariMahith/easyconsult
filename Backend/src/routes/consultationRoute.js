@@ -82,13 +82,16 @@ consultationRouter.get('/:id', async (req, res) => {
 // Create a new consultation
 consultationRouter.post('/create', async (req, res) => {
   try {
-    const { patientId, doctorId, time, diagnosis } = req.body;
+    const { patientId, doctorId, time, diagnosis, isAvailableToJoin, isPatientJoined, isActive } = req.body;
 
     const newConsultation = new Consultation({
       patientId,
       doctorId,
       time,
       diagnosis,
+      isAvailableToJoin,
+      isPatientJoined,
+      isActive
     });
 
     const savedConsultation = await newConsultation.save();
