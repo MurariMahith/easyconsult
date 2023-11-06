@@ -1,11 +1,19 @@
 const mongoose = require('mongoose');
 
 const doctorSchema = new mongoose.Schema({
-  firstname: {
+  firstName: {
     type: String,
     required: true,
   },
-  lastname: {
+  lastName: {
+    type: String,
+    required: true,
+  },
+  userName: {
+    type: String,
+    required: true,
+  },
+  password: {
     type: String,
     required: true,
   },

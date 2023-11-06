@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../appconstants';
 
 const MyConsultations = () => {
 
-  var apiUrl = "http://localhost:3030/consultation/patient"
-  apiUrl = apiUrl + window.localStorage.getItem("_id");
+  var apiUrl =  `${API_BASE_URL}/consultation/patient`
+  apiUrl = `${apiUrl}/${window.localStorage.getItem("_id")}`;
+  
   axios.get(apiUrl)
   .then((response) => {
     console.log(response.data);

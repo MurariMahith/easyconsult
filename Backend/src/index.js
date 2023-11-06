@@ -10,7 +10,7 @@ const prescriptionRouter = require('./routes/prescriptionRoute');
 const consultationRouter = require('./routes/consultationRoute');
 //db
 require('./db/db')
-
+const PORT_NUM = process.env.PORT || 3030;
 const app = express();
 
 // Middle ware
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 })
 
 
-app.listen(3030, () => {
+app.listen(PORT_NUM, () => {
     console.log("Running express server on port 3000");
     log("Running express server on port 3000");
 })

@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../appconstants';
 
 const Profile = () => {
-  var apiUrl = "http://localhost:3030/patient/"
-  apiUrl = apiUrl + window.localStorage.getItem("_id");
+  
+  var apiUrl =  `${API_BASE_URL}/patient`
+  apiUrl = `${apiUrl}/${window.localStorage.getItem("_id")}`;
   axios.get(apiUrl)
   .then((response) => {
     console.log(response.data);
