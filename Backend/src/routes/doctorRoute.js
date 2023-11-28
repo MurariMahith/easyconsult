@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const Doctor = require('../db/schemas/Doctor');
-const Consultation = require('../db/schemas/Consultation'); // Assuming you have a Consultation schema
-const Patient = require('../db/schemas/Patient'); // Assuming you have a Patient schema
+const Consultation = require('../db/schemas/Consultation'); 
+const Patient = require('../db/schemas/Patient'); 
 
 const doctorRouter = Router();
 
@@ -33,12 +33,23 @@ doctorRouter.get('/:id', async (req, res) => {
 // Get doctors associated with a patient by patient ID
 doctorRouter.get('/patient/:patientId', async (req, res) => {
   try {
+    const patientId = req.params.patientId;
     const patient = await Patient.findById(req.params.patientId);
+    
     if (!patient) {
       return res.status(404).json({ error: 'Patient not found' });
     }
 
-    const doctors = await Doctor.find({ patients: patient._id });
+    // const doctors = await Doctor.find({ patients: patient._id });
+    const consultation = await Consultation.find({ patientId });
+    
+
+    const doctorIds = consultation.map((consultation) => consultation.doctorId);
+
+    // Find patients based on patientIds
+    const doctors = await Doctor.find({ _id: { $in: doctorIds } });
+    console.log(doctors)
+
     res.status(200).json(doctors);
   } catch (error) {
     console.error(error);

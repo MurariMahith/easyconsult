@@ -11,10 +11,11 @@ const prescriptionSchema = new mongoose.Schema({
   isActivity: Boolean,
   numberOfDays: Number,
   dosage: String,
-  when: {
-    type: String,
-    enum: ['morning', 'afternoon', 'evening', 'night', 'whenrequired'],
-  },
+  when: String,
+  isImage: Boolean,
+  imageUrl: String,
+  isYoutubeVideo: Boolean,
+  youtubeLink: String
 });
 
 const Prescription = mongoose.model('Prescription', prescriptionSchema);

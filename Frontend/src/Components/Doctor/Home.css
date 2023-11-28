@@ -1,0 +1,37 @@
+/* Doctor Home.css */
+
+.main-content {
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+  }
+  
+  .appointment-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .appointment-list li {
+    margin-bottom: 10px;
+  }
+  
+  .patients-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .patients-list li {
+    margin-bottom: 10px;
+  }
+
+  .medium-pic
+{
+    width: 150px;
+    height: auto;
+    border-radius: 100%;
+    margin: 10px;
+}
+  
+  

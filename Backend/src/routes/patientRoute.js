@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const { default: mongoose } = require('mongoose');
 const Patient = require('../db/schemas/Patient')
+const Doctor = require('../db/schemas/Doctor')
+const Consultation = require('../db/schemas/Consultation')
 
 const patientRouter = Router()
 
@@ -16,12 +18,25 @@ patientRouter.get("/", async (req, res) => {
     }     
 })
 
-// get all patients wrt doctor
-patientRouter.get("/doctor/:doctorId", (req, res) => {
-    const doctorId = parseInt(req.params.doctorId);
-        
-    res.send("response sent successfully.")
-})
+patientRouter.get('/doctor/:doctorId', async (req, res) => {
+  try {
+    const doctorId = req.params.doctorId;
+
+    // Find all consultations with the given doctorId
+    const consultations = await Consultation.find({ doctorId });
+
+    // Extract patientIds from consultations
+    const patientIds = consultations.map((consultation) => consultation.patientId);
+
+    // Find patients based on patientIds
+    const patients = await Patient.find({ _id: { $in: patientIds } });
+
+    res.status(200).json(patients);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 // get patient with id
 patientRouter.get("/:id", async (req, res) => {

@@ -46,7 +46,7 @@ prescriptionRouter.post('/createmany', async (req, res) => {
       const savedPrescriptions = [];
   
       for (const prescriptionData of prescriptionsData) {
-        const { name, notes, isMedication, isActivity, numberOfDays, dosage, when } = prescriptionData;
+        const { name, notes, isMedication, isActivity, numberOfDays, dosage, when, isYoutubeVideo, youtubeLink, isImage, imageUrl } = prescriptionData;
   
         const newPrescription = new Prescription({
           name,
@@ -56,6 +56,10 @@ prescriptionRouter.post('/createmany', async (req, res) => {
           numberOfDays,
           dosage,
           when,
+          isYoutubeVideo,
+          youtubeLink,
+          isImage,
+          imageUrl
         });
   
         const savedPrescription = await newPrescription.save();

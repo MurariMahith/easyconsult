@@ -43,4 +43,55 @@ diagnosisRouter.post('/create', async (req, res) => {
   }
 });
 
+diagnosisRouter.post('/createmultiple', async (req, res) => {
+  try {
+    const diagnosesData = req.body;
+
+    // If the request body is an array, create multiple diagnoses
+    if (Array.isArray(diagnosesData)) {
+      const createdDiagnoses = await Diagnosis.create(diagnosesData);
+      res.status(201).json(createdDiagnoses);
+    } else {
+      // If the request body is a single object, create a single diagnosis
+      const { diseaseName, symptoms, prescription } = diagnosesData;
+      const newDiagnosis = new Diagnosis({
+        diseaseName,
+        symptoms,
+        prescription,
+      });
+
+      const savedDiagnosis = await newDiagnosis.save();
+      res.status(201).json(savedDiagnosis);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+diagnosisRouter.put('/:id', async (req, res) => {
+  const { prescription} = req.body;
+
+  try {
+    const updatedDiagnosis = await Diagnosis.findByIdAndUpdate(
+      req.params.id,
+      {
+
+        prescription,
+
+      },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedDiagnosis) {
+      return res.status(404).json({ error: 'Diagnosis not found' });
+    }
+
+    res.status(200).json(updatedDiagnosis);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 module.exports = diagnosisRouter;

@@ -102,6 +102,27 @@ consultationRouter.post('/create', async (req, res) => {
   }
 });
 
+// Create empty consultation with doctor ID
+consultationRouter.post('/createEmptyConsultation', async (req, res) => {
+  try {
+    const { doctorId, time, isAvailableToJoin, isPatientJoined, isActive } = req.body;
+
+    const newConsultation = new Consultation({
+      doctorId,
+      time,
+      isAvailableToJoin,
+      isPatientJoined,
+      isActive
+    });
+
+    const savedConsultation = await newConsultation.save();
+    res.status(201).json(savedConsultation);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // Delete a consultation by ID
 consultationRouter.delete('/:id', async (req, res) => {
   try {
@@ -116,11 +137,22 @@ consultationRouter.delete('/:id', async (req, res) => {
   }
 });
 
+//consultations for patient dashboard
+consultationRouter.get('/consultpatient/:patientId', async (req, res) => {
+  try {
+    const consultations = await Consultation.find({ patientId: req.params.patientId }).populate('patientId', 'firstName');
+    console.log("hello"+consultations)
+    res.status(200).json(consultations);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // Update a consultation by ID
 consultationRouter.put('/:id', async (req, res) => {
   try {
     const consultationId = req.params.id;
-
     const updatedFields = {};
     if (req.body.patientId) {
       updatedFields.patientId = req.body.patientId;
@@ -128,11 +160,22 @@ consultationRouter.put('/:id', async (req, res) => {
     if (req.body.doctorId) {
       updatedFields.doctorId = req.body.doctorId;
     }
+    if (req.body.isAvailableToJoin) {
+      updatedFields.isAvailableToJoin = req.body.isAvailableToJoin;
+    }
+    if (req.body.isPatientJoined) {
+      updatedFields.isPatientJoined = req.body.isPatientJoined;
+    }
+    if (req.body.isActive) {
+      updatedFields.isActive = req.body.isActive;
+    }
     if (req.body.time) {
       updatedFields.time = req.body.time;
     }
+    updatedFields.diagnosis = req.body.diagnosis;
+    updatedFields.selectedPrescriptions = req.body.selectedPrescriptions;
     if (req.body.diagnosis) {
-      updatedFields.diagnosis = req.body.diagnosis;
+      
     }
 
     const updatedConsultation = await Consultation.findByIdAndUpdate(
@@ -144,7 +187,36 @@ consultationRouter.put('/:id', async (req, res) => {
     if (!updatedConsultation) {
       return res.status(404).json({ error: 'Consultation not found' });
     }
+    //console.log(updatedConsultation)
+    res.status(200).json(updatedConsultation);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
+consultationRouter.put('/selectedprescriptions/:id', async (req, res) => {
+  try {
+    const consultationId = req.params.id;
+
+    if(req.body == undefined)
+    {
+      console.log("req.body")
+      return
+    }
+    const updatedFields = {};
+    updatedFields.selectedPrescriptions = req.body
+    console.log(req.body)
+    const updatedConsultation = await Consultation.findByIdAndUpdate(
+      consultationId,
+      { $set: updatedFields },
+      { new: true }
+    );
+
+    if (!updatedConsultation) {
+      return res.status(404).json({ error: 'Consultation not found' });
+    }
+    //console.log(updatedConsultation)
     res.status(200).json(updatedConsultation);
   } catch (error) {
     console.error(error);

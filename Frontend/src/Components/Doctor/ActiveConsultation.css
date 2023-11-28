@@ -1,0 +1,36 @@
+.prescription-container
+{
+    /* display: flex;
+    justify-content: center; */
+
+}
+
+.prescription-display
+{
+    border: 1px solid black;
+    border-radius: 5px;
+    /* margin: 10%;*/
+    padding:10px;
+    /* min-height: 400px; */
+    /* height: 90%; */
+}
+
+.half-container {
+    display: flex;
+    /* width: 100%; */
+}
+
+.half {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    max-width: 50%;
+}
+
+.flex-center
+{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+

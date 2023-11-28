@@ -1,0 +1,103 @@
+/* Sidebar styles (adjust as needed) */
+.patient-sidebar {
+    width: 250px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .patient-sidebar h2 {
+    font-size: 18px;
+  }
+  
+  /* Main content container */
+  .main-content {
+    padding: 20px;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+  }
+  
+  /* Header styles */
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center !important;
+  }
+  
+  /* Sample content styles (customize as needed) */
+  p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  input[type="date"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-right:10px;
+  }
+
+  /* AppointmentDetails.css */
+/* ActiveConsultation.css */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 560;
+}
+
+.main-content {
+  /* max-width: 800px; */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* width: 560px; */
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: red;
+}
+
+
+.container-active-consultation-patient
+{
+    /* margin-left: 250px; */
+    display: flex;
+    justify-content: center;
+}
+

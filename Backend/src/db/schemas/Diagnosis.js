@@ -13,7 +13,15 @@ const diagnosisSchema = new mongoose.Schema({
       ref: 'Prescription', // Reference to a "Prescription" model
     },
   ],
+  selectedPrescriptions: [
+    {
+      type: Object,
+      ref: 'Prescription', // Reference to a "Prescription" model
+    },
+  ],
 });
+
+
 
 const Diagnosis = mongoose.model('Diagnosis', diagnosisSchema);
 

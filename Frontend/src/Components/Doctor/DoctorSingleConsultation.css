@@ -1,0 +1,26 @@
+.main-content-single-consultation
+{
+    margin: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding:20px;
+    background-color: white;
+    /* width: min-content; */
+
+}
+
+.container-single-consultation
+{
+    margin-left: 250px;
+    display: flex;
+    justify-content: center;
+}
+
+.prescription
+{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 10px;
+    /* width:min-content; */
+}

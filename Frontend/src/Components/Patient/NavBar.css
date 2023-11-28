@@ -1,0 +1,69 @@
+/* NavBar.css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+  }
+  
+  .menu-toggle {
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+  }
+  
+  .nav-list {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-list li {
+    margin-right: 20px;
+  }
+  
+  .nav-list a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-list a:hover {
+    color: #007bff;
+  }
+  
+  /* Responsive styles */
+  @media only screen and (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+  
+    .nav-list {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      padding: 10px 20px;
+      z-index: 1;
+    }
+  
+    .nav-list.open {
+      display: flex; /* Display the nav-list when the 'open' class is present */
+    }
+  
+    .nav-list li {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  
+    .nav-list a {
+      font-size: 18px;
+    }
+  }

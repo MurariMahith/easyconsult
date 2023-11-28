@@ -13,13 +13,11 @@ const consultationSchema = new mongoose.Schema({
   },
   time: {
     type: Date,
-    required: true,
   },
   // using object rather than object reference fopr consultation
   diagnosis: {
     type: Object,
     ref: 'Diagnosis', // Reference to a "Diagnosis" model
-    required: true,
   },
   isAvailableToJoin: {
     type: Boolean,
@@ -32,7 +30,12 @@ const consultationSchema = new mongoose.Schema({
   isActive: {
     type: Boolean,
     required: true
-  }
+  },
+  selectedPrescriptions: [
+    {
+      type: Object
+    },
+  ],
 }, {
     strictPopulate: false // Set strictPopulate to false
   });
