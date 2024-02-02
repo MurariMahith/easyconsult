@@ -34,23 +34,23 @@ const ActiveConsultation = () => {
     const fetchData = async () => {
       try {
         
-        const response = await axios.get(`http://localhost:3030/consultation/${id}`);
+        const response = await axios.get(`https://easyconsultapi.onrender.com/consultation/${id}`);
         if(response.data.isPatientJoined)
         {
             setData(response.data);
             setConsultation(response.data)
 
             // fetch diagnoses
-            const diagnosesResponse = await axios.get(`http://localhost:3030/diagnosis/`);
+            const diagnosesResponse = await axios.get(`https://easyconsultapi.onrender.com/diagnosis/`);
             setDiagnoses(diagnosesResponse.data)
 
-            const prescriptionResponse = await axios.get(`http://localhost:3030/prescription/`);
+            const prescriptionResponse = await axios.get(`https://easyconsultapi.onrender.com/prescription/`);
             setPrescriptions(prescriptionResponse.data)
 
-            const patientResponse = await axios.get(`http://localhost:3030/patient/${response.data.patientId}`);
+            const patientResponse = await axios.get(`https://easyconsultapi.onrender.com/patient/${response.data.patientId}`);
             setPatient(patientResponse.data)
 
-            const doctorResponse = await axios.get(`http://localhost:3030/doctor/${window.localStorage.getItem("doctorID")}`);
+            const doctorResponse = await axios.get(`https://easyconsultapi.onrender.com/doctor/${window.localStorage.getItem("doctorID")}`);
             setDoctor(doctorResponse.data)
 
             // fetch prescriptions
@@ -67,7 +67,7 @@ const ActiveConsultation = () => {
         setLoading(false);
       }
     };
-    const socket = io('http://localhost:3030'); 
+    const socket = io('https://easyconsultapi.onrender.com'); 
 
     socket.on('consultationChanged', (newConsultation) => {
       console.log("Change detected.")
@@ -87,9 +87,9 @@ const ActiveConsultation = () => {
     // consultation.diagnosis.selectedPrescriptions = selectedPrescriptions
     console.log(consultation)
     console.log(selectedPrescriptions)
-    //axios.put("http://localhost:3030/consultation/" + id,consultation)
+    //axios.put("https://easyconsultapi.onrender.com/consultation/" + id,consultation)
 
-    //axios.put("http://localhost:3030/consultation/selectedprescriptions/" + id,selectedPrescriptions).then(r => console.log(r.data))
+    //axios.put("https://easyconsultapi.onrender.com/consultation/selectedprescriptions/" + id,selectedPrescriptions).then(r => console.log(r.data))
   }, [consultation, selectedPrescriptions])
 
   if (loading) {
@@ -133,7 +133,7 @@ const ActiveConsultation = () => {
     if(diagnosis === null)
     consultation.selectedPrescriptions = []
     setConsultation(consultation)
-    axios.put("http://localhost:3030/consultation/" + id,consultation)
+    axios.put("https://easyconsultapi.onrender.com/consultation/" + id,consultation)
     
   };
 
@@ -152,7 +152,7 @@ const ActiveConsultation = () => {
       consultation.selectedPrescriptions.push(prescription)
     }
     setConsultation(consultation)
-    axios.put("http://localhost:3030/consultation/" + id,consultation)
+    axios.put("https://easyconsultapi.onrender.com/consultation/" + id,consultation)
   };
 
   const isPrescriptionAdded = (prescription) => {
@@ -166,7 +166,7 @@ const ActiveConsultation = () => {
       consultation.selectedPrescriptions = consultation.selectedPrescriptions.filter((selectedPrescription) => selectedPrescription._id !== prescription._id);
     }
     setConsultation(consultation)
-    axios.put("http://localhost:3030/consultation/" + id,consultation)
+    axios.put("https://easyconsultapi.onrender.com/consultation/" + id,consultation)
   };
 
   const handleDaysChange = (event) => {

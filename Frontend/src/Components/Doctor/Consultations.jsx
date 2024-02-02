@@ -15,7 +15,7 @@ const Consultations = () => {
   // Simulated data (replace with actual API calls)
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await axios.get(`http://localhost:3030/consultation/doctor/${window.localStorage.getItem("doctorID")}`);
+      const response = await axios.get(`https://easyconsultapi.onrender.com/consultation/doctor/${window.localStorage.getItem("doctorID")}`);
       setConsultations(response.data)
     }
     fetchdata()
@@ -23,9 +23,9 @@ const Consultations = () => {
 
   const handleCreateConsultaion=()=>{
     // call to create new consultation object
-    // http://localhost:3030/consultation/createEmptyConsultation
+    // https://easyconsultapi.onrender.com/consultation/createEmptyConsultation
     var patientQrLink = "QR is invalid please ask Doctor to generate QR again";
-    axios.post("http://localhost:3030/consultation/createEmptyConsultation", {
+    axios.post("https://easyconsultapi.onrender.com/consultation/createEmptyConsultation", {
       "doctorId": "653b2aadc1aa1659057e5644",
       "time": "2023-10-25T10:00:00.000Z",
       "isAvailableToJoin": true,
@@ -40,7 +40,7 @@ const Consultations = () => {
         ReactDOM.render(<QRCode value={patientQrLink} />, document.getElementById("qr-container"));
         setShowNavigateButton(true)
         // mukesh - write code here to fetch teh consultation object every 3 seconds and check if "isPatientJoined" property is true or not. 
-        // url : http://localhost:3030/consultation/:id here id is consultationID
+        // url : https://easyconsultapi.onrender.com/consultation/:id here id is consultationID
         // if true "navigate doctor to "/doctor/activeconsultation" page or add one more button to UI upon clciking that we should navigate doctor to "/doctor/activeconsultation" page
       }, err => console.error(err))
     
@@ -63,7 +63,7 @@ const Consultations = () => {
   const deleteConsultationClick = (consultationId) => {
     // Navigate to the "abc" URL when the second button is clicked
     console.log(consultationId)
-    axios.delete("http://localhost:3030/consultation/" + consultationId)
+    axios.delete("https://easyconsultapi.onrender.com/consultation/" + consultationId)
     //window.location.href = '/doctor/activeconsultation/' + newConsultationID;
   };
 

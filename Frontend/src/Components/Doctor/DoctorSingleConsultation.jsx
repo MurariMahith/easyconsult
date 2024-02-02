@@ -14,14 +14,14 @@ const DoctorSingleConsultation = () => {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3030/consultation/${id}`);
+        const response = await axios.get(`https://easyconsultapi.onrender.com/consultation/${id}`);
         var consultationObj = response.data
         if(response.data.isAvailableToJoin)
         {
             consultationObj.isAvailableToJoin = false;
             consultationObj.isPatientJoined = true;
             consultationObj.patientId = window.localStorage.getItem("patientID")
-            const response = await axios.put(`http://localhost:3030/consultation/${id}`, consultationObj);
+            const response = await axios.put(`https://easyconsultapi.onrender.com/consultation/${id}`, consultationObj);
             console.log(response.data)
         }
         setData(response.data);
@@ -56,7 +56,7 @@ const DoctorSingleConsultation = () => {
   const deleteConsultationClick = (consultationId) => {
     // Navigate to the "abc" URL when the second button is clicked
     console.log(consultationId)
-    axios.delete("http://localhost:3030/consultation/" + consultationId).then(res => window.location.href = "/doctor/consultations")
+    axios.delete("https://easyconsultapi.onrender.com/consultation/" + consultationId).then(res => window.location.href = "/doctor/consultations")
     //window.location.href = '/doctor/activeconsultation/' + newConsultationID;
   };
 

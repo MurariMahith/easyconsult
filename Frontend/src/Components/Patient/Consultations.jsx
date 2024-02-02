@@ -16,7 +16,7 @@ const Consultations = () => {
         var patientID = window.localStorage.getItem("patientID");
         console.log(patientID)
 
-        const response = await axios.get('http://localhost:3030/consultation/patient/' + patientID);
+        const response = await axios.get('https://easyconsultapi.onrender.com/consultation/patient/' + patientID);
         // Set the fetched data in the state
         setConsultations(response.data);
       } catch (error) {

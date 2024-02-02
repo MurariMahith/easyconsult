@@ -20,14 +20,14 @@ const DoctorHomePage = () => {
     const fetchdata = async () => {
       try
       {
-        var doctorResponse = await axios.get(`http://localhost:3030/doctor/${window.localStorage.getItem("doctorID")}`);
+        var doctorResponse = await axios.get(`https://easyconsultapi.onrender.com/doctor/${window.localStorage.getItem("doctorID")}`);
         setDoctor(await doctorResponse.data)
 
   
-        var doctorConsultations = await axios.get(`http://localhost:3030/consultation/doctor/${window.localStorage.getItem("doctorID")}`);
+        var doctorConsultations = await axios.get(`https://easyconsultapi.onrender.com/consultation/doctor/${window.localStorage.getItem("doctorID")}`);
         setConsultations(await doctorConsultations.data)
   
-        var doctorPatients = await axios.get(`http://localhost:3030/patient/doctor/${window.localStorage.getItem("doctorID")}`);
+        var doctorPatients = await axios.get(`https://easyconsultapi.onrender.com/patient/doctor/${window.localStorage.getItem("doctorID")}`);
         console.log(doctorPatients.data)
         setPatients(doctorPatients.data)
         

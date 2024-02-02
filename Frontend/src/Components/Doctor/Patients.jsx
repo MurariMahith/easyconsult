@@ -9,7 +9,7 @@ const Patients = () => {
   ]);
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await axios.get(`http://localhost:3030/patient/doctor/${window.localStorage.getItem("doctorID")}`);
+      const response = await axios.get(`https://easyconsultapi.onrender.com/patient/doctor/${window.localStorage.getItem("doctorID")}`);
       console.log(response.data)
       setPatients(response.data)
     }

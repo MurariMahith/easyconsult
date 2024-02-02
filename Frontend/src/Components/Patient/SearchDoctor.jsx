@@ -14,7 +14,7 @@ const SearchDoctor = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3030/doctor/');
+        const response = await axios.get('https://easyconsultapi.onrender.com/doctor/');
         setDoctorsData(response.data);
         setSearchResults(response.data); // Set search results to all doctors
       } catch (error) {

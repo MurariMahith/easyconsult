@@ -8,7 +8,7 @@ const Appointments = () => {
 
   // Simulated data (replace with actual API calls)
   useEffect(async () => {
-    const res = await axios.get("http://localhost:3030/prescription/")
+    const res = await axios.get("https://easyconsultapi.onrender.com/prescription/")
     setAppointments(res.data.toArray());
     // Fetch appointments from your API here
     // Example data (replace with actual data retrieval):

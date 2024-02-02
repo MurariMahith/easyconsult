@@ -22,14 +22,14 @@ const PatientHomePage = () => {
     const fetchdata = async () => {
       try
       {
-        const patientResponse = await axios.get(`http://localhost:3030/patient/${window.localStorage.getItem("patientID")}`);
+        const patientResponse = await axios.get(`https://easyconsultapi.onrender.com/patient/${window.localStorage.getItem("patientID")}`);
         setPatient(patientResponse.data)
 
   
-        const patientConsultations = await axios.get(`http://localhost:3030/consultation/consultpatient/${window.localStorage.getItem("patientID")}`);
+        const patientConsultations = await axios.get(`https://easyconsultapi.onrender.com/consultation/consultpatient/${window.localStorage.getItem("patientID")}`);
         await setConsultations(patientConsultations.data)
 
-        const patientDoctors = await axios.get(`http://localhost:3030/doctor/patient/${window.localStorage.getItem("patientID")}`);
+        const patientDoctors = await axios.get(`https://easyconsultapi.onrender.com/doctor/patient/${window.localStorage.getItem("patientID")}`);
         console.log(patientDoctors.data)
         setDoctors(patientDoctors.data)
         console.log(consultations)

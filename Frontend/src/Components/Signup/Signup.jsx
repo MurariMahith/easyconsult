@@ -158,10 +158,10 @@ const Signup = () => {
       console.log(formData)
       let createurl = '';
       if(formData.personType == 'Doctor'){
-        createurl = 'http://localhost:3030/doctor/create';
+        createurl = 'https://easyconsultapi.onrender.com/doctor/create';
       }
       else if(formData.personType == 'Patient'){
-        createurl = 'http://localhost:3030/patient/create2';
+        createurl = 'https://easyconsultapi.onrender.com/patient/create2';
       }
       const formDataWithUsername = {
         ...formData,
@@ -195,9 +195,9 @@ const Signup = () => {
     try {
       let loginUrl = '';
       if (formData.personType === 'Doctor') {
-        loginUrl = 'http://localhost:3030/doctor/login'; // Replace with the actual doctor login API endpoint
+        loginUrl = 'https://easyconsultapi.onrender.com/doctor/login'; // Replace with the actual doctor login API endpoint
       } else if (formData.personType === 'Patient') {
-        loginUrl = 'http://localhost:3030/patient/login'; // Replace with the actual patient login API endpoint
+        loginUrl = 'https://easyconsultapi.onrender.com/patient/login'; // Replace with the actual patient login API endpoint
       }
       const loginData = {
         email: formData.email,
